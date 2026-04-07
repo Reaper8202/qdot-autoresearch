@@ -1,0 +1,18 @@
+seed: 1337
+image_size: 128
+train_size: 512
+val_size: 128
+batch_size: 8
+max_epochs: 30
+learning_rate: 0.001
+class_weights: [1.0, 10.0]
+encoder_channels: [32, 64, 128]
+num_workers: 0
+synthetic:
+  min_dots: 5
+  max_dots: 20
+  dot_radius_min: 3.0
+  dot_radius_max: 7.0
+  noise_std: 0.08
+  background: 0.04
+output_dir: runs/noisy_eval_5_20

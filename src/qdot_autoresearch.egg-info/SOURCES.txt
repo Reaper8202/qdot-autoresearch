@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/__init__.py
+src/config.py
+src/data.py
+src/eval.py
+src/metrics.py
+src/model.py
+src/train.py
+src/qdot_autoresearch.egg-info/PKG-INFO
+src/qdot_autoresearch.egg-info/SOURCES.txt
+src/qdot_autoresearch.egg-info/dependency_links.txt
+src/qdot_autoresearch.egg-info/requires.txt
+src/qdot_autoresearch.egg-info/top_level.txt

@@ -1,0 +1,22 @@
+[project]
+name = "qdot-autoresearch"
+version = "0.1.0"
+description = "Quantum dot synthetic segmentation baseline — plain PyTorch, Colab-ready"
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "pillow>=10.0",
+    "pyyaml>=6.0",
+    "scipy>=1.11",
+    "streamlit>=1.32",
+    "torch>=2.1",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]

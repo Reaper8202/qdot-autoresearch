@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: qdot-autoresearch
+Version: 0.1.0
+Summary: Quantum dot synthetic tracking baseline scaffold for autonomous experimentation
+Requires-Python: >=3.10
+Requires-Dist: deeptrack>=2.0.1
+Requires-Dist: deeplay
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: numpy>=1.26
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: scikit-image>=0.24
+Requires-Dist: torch

@@ -1,0 +1,18 @@
+seed: 1337
+image_size: 640
+train_size: 1024
+val_size: 256
+batch_size: 1
+max_epochs: 25
+learning_rate: 0.0005
+class_weights: [1.0, 8.0]
+encoder_channels: [32, 64, 128, 256]
+num_workers: 2
+synthetic:
+  min_dots: 0
+  max_dots: 500
+  dot_radius_min: 3.0
+  dot_radius_max: 7.0
+  noise_std: 0.04
+  background: 0.04
+output_dir: runs/high_density_0_500_640_t4

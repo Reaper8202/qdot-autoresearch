@@ -81,6 +81,23 @@ Edit `configs/baseline.yaml` to tune:
 - **Loss**: CrossEntropyLoss with class weights (dots are sparse)
 - **Metrics**: `val_pixel_accuracy`, `val_iou`
 
+## Recommended Colab experiments
+
+If you are using a Google Colab T4, do **not** start with the naive `0-999` dense regime. It is too broad and was unstable in local testing.
+
+Recommended order:
+
+1. `configs/high_density_0_200_640_t4.yaml`
+2. `configs/high_density_0_500_640_t4.yaml`
+3. Only revisit `configs/high_density_0_999_640.yaml` if the narrower regimes are already strong
+
+Why this recommendation:
+- `640x640` is a more defensible resolution for higher dot counts
+- `0-200` is much more likely to converge cleanly than `0-999`
+- `0-999` at the same dot size remains an extreme regime and should be treated as a stress test, not the baseline plan
+
 ## Colab
 
-See `colab/README.md` for notebook workflow.
+See:
+- `colab/README.md`
+- `colab/colab_commands.md`

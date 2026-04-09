@@ -31,7 +31,12 @@ Requires a trained checkpoint at `runs/baseline/model.pt` (see **Train** below).
 python -m src.train --config configs/baseline.yaml
 ```
 
-Per-epoch JSON is printed to stdout. Final checkpoint and `metrics.json` are saved to `runs/baseline/`.
+Per-epoch JSON is printed to stdout. Training now saves checkpoints every epoch plus rolling/best artifacts:
+- `runs/.../checkpoints/epoch_XXX.pt`
+- `runs/.../last_model.pt`
+- `runs/.../best_model.pt`
+- `runs/.../model.pt` (final epoch)
+- `runs/.../metrics.json`
 
 ## Eval
 

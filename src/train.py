@@ -57,6 +57,8 @@ def train(cfg: dict) -> dict:
 
     output_dir = Path(cfg["output_dir"])
     output_dir.mkdir(parents=True, exist_ok=True)
+    checkpoints_dir = output_dir / "checkpoints"
+    checkpoints_dir.mkdir(parents=True, exist_ok=True)
 
     train_ds = build_dataset(cfg, split="train", seed=seed)
     val_ds = build_dataset(cfg, split="val", seed=seed + 1)
@@ -74,6 +76,8 @@ def train(cfg: dict) -> dict:
     optimizer = torch.optim.Adam(model.parameters(), lr=float(cfg["learning_rate"]))
 
     history = []
+    best_iou = float("-inf")
+    best_row = {}
     for epoch in range(int(cfg["max_epochs"])):
         model.train()
         batch_losses = []
@@ -96,9 +100,29 @@ def train(cfg: dict) -> dict:
         history.append(row)
         print(json.dumps(row), flush=True)
 
+        epoch_ckpt = checkpoints_dir / f"epoch_{epoch + 1:03d}.pt"
+        torch.save(model.state_dict(), epoch_ckpt)
+        torch.save(model.state_dict(), output_dir / "last_model.pt")
+
+        if row["val_iou"] > best_iou:
+            best_iou = row["val_iou"]
+            best_row = row
+            torch.save(model.state_dict(), output_dir / "best_model.pt")
+
+        with open(output_dir / "metrics.json", "w", encoding="utf-8") as f:
+            json.dump({
+                "history": history,
+                "best": best_row,
+                "final": history[-1] if history else {},
+            }, f, indent=2)
+
     torch.save(model.state_dict(), output_dir / "model.pt")
     with open(output_dir / "metrics.json", "w", encoding="utf-8") as f:
-        json.dump({"history": history, "final": history[-1] if history else {}}, f, indent=2)
+        json.dump({
+            "history": history,
+            "best": best_row,
+            "final": history[-1] if history else {},
+        }, f, indent=2)
 
     return history[-1] if history else {}
 
